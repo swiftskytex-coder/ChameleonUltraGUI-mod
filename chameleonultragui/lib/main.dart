@@ -26,6 +26,7 @@ import 'package:chameleonultragui/gui/page/flashing.dart';
 import 'package:chameleonultragui/gui/page/read_card.dart';
 import 'package:chameleonultragui/gui/page/write_card.dart';
 import 'package:chameleonultragui/gui/page/pending_connection.dart';
+import 'package:chameleonultragui/gui/page/addresses.dart';
 
 // Localizations
 import 'package:chameleonultragui/generated/i18n/app_localizations.dart';
@@ -181,8 +182,8 @@ class _MainPageState extends State<MainPage> {
         selectedIndex != 2 &&
         selectedIndex != 5 &&
         selectedIndex != 6 &&
-        selectedIndex != 7) {
-      // If not connected, and not on home, tools, settings or dev page, go to home page
+        selectedIndex != 7 &&
+        selectedIndex != 8) {
       selectedIndex = 0;
     }
 
@@ -223,6 +224,9 @@ class _MainPageState extends State<MainPage> {
         break;
       case 7:
         page = const DebugPage();
+        break;
+      case 8:
+        page = const AddressesPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -330,8 +334,12 @@ class _MainPageState extends State<MainPage> {
                                 NavigationRailDestination(
                                   icon: const Icon(Icons.bug_report),
                                   label: Text(
-                                      '🐞 ${AppLocalizations.of(context)!.debug} 🐞'),
+                                      'Debug'),
                                 ),
+                              NavigationRailDestination(
+                                icon: const Icon(Icons.home_work),
+                                label: Text('Addresses'),
+                              ),
                             ],
                             selectedIndex: selectedIndex,
                             onDestinationSelected: (value) {
