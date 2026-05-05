@@ -101,17 +101,13 @@ class AddressesPageState extends State<AddressesPage> {
     }
 
     try {
-      await appState.communicator!.setActiveSlot(0);
+      await appState.communicator!.activateSlot(0);
 
-      await appState.communicator!.setSlotTagType(0, key.tag);
+      await appState.communicator!.setSlotType(0, key.tag);
 
-      await appState.communicator!.setSlotData(
-        0,
-        hexToBytes(key.uid),
-        key.tag,
-      );
+      await appState.communicator!.setDefaultDataToSlot(0, key.tag);
 
-      await appState.communicator!.setSlotEnable(0, true, true);
+      await appState.communicator!.enableSlot(0, TagFrequency.hf, true);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
